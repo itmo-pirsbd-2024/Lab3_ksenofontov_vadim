@@ -1,7 +1,9 @@
 package org.example;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
@@ -86,7 +88,7 @@ public class Main {
         var th = new Thread(() -> {
             for (int i = 0; i < 3; i++) {
                 var cur = queue.wait_and_pop();
-                System.out.println("Waited and popped: " + cur);
+                System.out.println("Waited and popped: " + cur + " [" + new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime()) + "]");
             }
         });
         th.start();
@@ -131,8 +133,8 @@ public class Main {
 
         Random random = new Random();
 
-        long NUMBER_OF_VALUES = 2_00_000_000L;
-        long NUMBER_OF_THREADS = 3;
+        long NUMBER_OF_VALUES = 1_000_000_000L;
+        long NUMBER_OF_THREADS = 9;
 
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
@@ -197,7 +199,7 @@ public class Main {
         Random random = new Random();
 
         long NUMBER_OF_VALUES = 20_000_000L;
-        long NUMBER_OF_THREADS = 2;
+        long NUMBER_OF_THREADS = 8;
 
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
@@ -268,7 +270,7 @@ public class Main {
         Random random = new Random();
 
         long NUMBER_OF_VALUES = 20_000_000L;
-        long NUMBER_OF_THREADS = 2;
+        long NUMBER_OF_THREADS = 8;
 
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
@@ -341,7 +343,7 @@ public class Main {
         Random random = new Random();
 
         long NUMBER_OF_VALUES = 20_000_000L;
-        long NUMBER_OF_THREADS = 4;
+        long NUMBER_OF_THREADS = 8;
 
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();
@@ -405,8 +407,8 @@ public class Main {
 
         Random random = new Random();
 
-        long NUMBER_OF_VALUES = 100_000_000L;
-        long NUMBER_OF_THREADS = 1;
+        long NUMBER_OF_VALUES = 20_000_000L;
+        long NUMBER_OF_THREADS = 8;
 
         var start = System.currentTimeMillis();
         var end = System.currentTimeMillis();

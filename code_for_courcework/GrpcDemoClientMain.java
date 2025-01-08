@@ -234,22 +234,8 @@ public class GrpcDemoClientMain {
             content.add(BorderLayout.CENTER, primaryPanel);
 
             timer = new Timer();
-            //timer.schedule(paintSectorsGrid, 1000);
         }
 
-        /*TimerTask paintSectorsGrid = new TimerTask() {
-            @Override
-            public void run() {
-                Graphics g = canvas.getGraphics();
-
-                g.setColor(Color.black);
-                for (var i = 0; i <= 600; i += 150) { // 100 represents the width in pixels between each line of the grid
-                    // draw horizontal lines
-                    g.drawLine(0, i, 600, i);
-                    g.drawLine(i, 0, i, 600);
-                }
-            }
-        };*/
 
         class ButtonsListener implements ActionListener {
             public void actionPerformed(ActionEvent e) {
@@ -259,8 +245,6 @@ public class GrpcDemoClientMain {
                 var channel = ManagedChannelBuilder.forAddress("localhost", 8080)
                         .usePlaintext()
                         .build();
-
-                //var stub = UsersTrackerServiceGrpc.newStub(channel);
 
                 stubLink = UsersTrackerServiceGrpc.newStub(channel);
 
@@ -317,13 +301,11 @@ public class GrpcDemoClientMain {
 
         var stub = UsersTrackerServiceGrpc.newStub(channel);
 
-        //GUI.stubLink = UsersTrackerServiceGrpc.newStub(channel);
 
         stub.getMostFilledSectors(UserID.newBuilder().setId(0).build(), new StreamObserver<MostFilledSectors>() {
             @Override
             public void onNext(MostFilledSectors mostFilledSectors) {
                 GUI.sharedResourses.processMostFilledSectors(mostFilledSectors);
-                System.out.println(2);
             }
 
             @Override
@@ -335,49 +317,6 @@ public class GrpcDemoClientMain {
             }
         });
 
-
-        /*var stub2 = UsersTrackerServiceGrpc.newBlockingStub(channel);
-
-        var res = stub2.getUserPositions(UserID.newBuilder().setId(1).build());
-
-        while (res.hasNext()) {
-            var currentPoint = res.next();
-
-            System.out.println("x: " + currentPoint.getX());
-            System.out.println("y: " + currentPoint.getY());
-
-            GUI.sharedResourses.processUserPositions(currentPoint.getX(), currentPoint.getY());
-        }*/
-
-        /*var res = stub2.getMostFilledSectors(UserID.newBuilder().setId(0).build());
-
-        while (res.hasNext()) {
-            GUI.sectors = res.next();
-
-            GUI.canvas.repaint();
-
-            System.out.println("Sectors: " + GUI.sectors.getSectorsList());
-        }*/
-
-            /*var stub = DemoServiceGrpc.newFutureStub(channel);
-
-            var response = stub.getDudes(
-                GetDudesRequest.newBuilder()
-                    .addNames("Guy")
-                    .addNames("Nonexistent")
-                    .build()
-            );
-
-            var cf = new CompletableFuture<GetDudesResponse>();
-            response.addListener(() -> {
-                try {
-                    cf.complete(response.get());
-                } catch (InterruptedException | ExecutionException e) {
-                    cf.completeExceptionally(e);
-                }
-            }, executor);
-
-            System.out.println("Response: " + cf.join());*/
 
         channel.shutdown();
     }
