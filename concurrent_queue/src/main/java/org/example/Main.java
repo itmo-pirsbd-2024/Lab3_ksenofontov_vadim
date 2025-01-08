@@ -79,9 +79,9 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
-        // basic queue operations
-        /*ThreadSafeQueue<String> queue = new ThreadSafeQueue<String>();
+    ////////////////////////////////////////////////////////////////
+    static void basicQueueOperations() {
+        ThreadSafeQueue<String> queue = new ThreadSafeQueue<String>();
 
         var th = new Thread(() -> {
             for (int i = 0; i < 3; i++) {
@@ -122,11 +122,11 @@ public class Main {
             th.join();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }*/
+        }
+    }
 
-
-        // linear impact of increase number of threads for generation of integers
-        /*
+    ////////////////////////////////////////////////////////////////
+    static void increaseThreadsForIntGenerationImpact() {
         long sum1 = 0;
 
         Random random = new Random();
@@ -187,11 +187,12 @@ public class Main {
         end = System.currentTimeMillis();
         timeDelta = (end - start);
 
-        System.out.println("multiple threads: " + timeDelta + " ms");*/
+        System.out.println("multiple threads: " + timeDelta + " ms");
+    }
 
-
-        // impact of increase number of threads for filling thread-local queues
-        /*long sum1 = 0;
+    ////////////////////////////////////////////////////////////////
+    static void increaseThreadsForFillingThreadlocalQueuesImpact() {
+        long sum1 = 0;
 
         Random random = new Random();
 
@@ -257,11 +258,12 @@ public class Main {
         long heapMaxSize = Runtime.getRuntime().maxMemory();
         long heapFreeSize = Runtime.getRuntime().freeMemory();
 
-        System.out.println(heapSize + " " + heapMaxSize + " " + heapFreeSize);*/
+        System.out.println(heapSize + " " + heapMaxSize + " " + heapFreeSize);
+    }
 
-
-        // impact of increase number of threads for filling thread-local queues
-        /*long sum1 = 0;
+    ////////////////////////////////////////////////////////////////
+    static void increaseThreadsForFillingThreadlocalQueuesImpact2() {
+        long sum1 = 0;
 
         Random random = new Random();
 
@@ -329,11 +331,12 @@ public class Main {
         long heapMaxSize = Runtime.getRuntime().maxMemory();
         long heapFreeSize = Runtime.getRuntime().freeMemory();
 
-        System.out.println(heapSize + " " + heapMaxSize + " " + heapFreeSize);*/
+        System.out.println(heapSize + " " + heapMaxSize + " " + heapFreeSize);
+    }
 
-
-        // using of builtin ConcurrentQueue
-        /*long sum1 = 0;
+    ////////////////////////////////////////////////////////////////
+    static void usingOfBuiltinConcurrentQueue() {
+        long sum1 = 0;
 
         Random random = new Random();
 
@@ -368,15 +371,11 @@ public class Main {
         }
 
 
-
         for (long j = 0; j < NUMBER_OF_VALUES / NUMBER_OF_THREADS; j++) {
             queue.add(random.nextInt(1000));
         }
 
         System.out.println(queue.peek());
-
-
-
 
 
         for (var th : threads) {
@@ -397,11 +396,12 @@ public class Main {
         long heapMaxSize = Runtime.getRuntime().maxMemory();
         long heapFreeSize = Runtime.getRuntime().freeMemory();
 
-        System.out.println(heapSize + " " + heapMaxSize + " " + heapFreeSize);*/
+        System.out.println(heapSize + " " + heapMaxSize + " " + heapFreeSize);
+    }
 
-
-        // using of implemented ThreadSafeQueue
-        /*long sum1 = 0;
+    ////////////////////////////////////////////////////////////////
+    static void usingOfImplementedThreadSafeQueue() {
+        long sum1 = 0;
 
         Random random = new Random();
 
@@ -436,15 +436,11 @@ public class Main {
         }
 
 
-
         for (long j = 0; j < NUMBER_OF_VALUES / NUMBER_OF_THREADS; j++) {
             queue.push(random.nextInt(1000));
         }
 
         System.out.println(queue.wait_and_pop());
-
-
-
 
 
         for (var th : threads) {
@@ -465,6 +461,33 @@ public class Main {
         long heapMaxSize = Runtime.getRuntime().maxMemory();
         long heapFreeSize = Runtime.getRuntime().freeMemory();
 
-        System.out.println(heapSize + " " + heapMaxSize + " " + heapFreeSize);*/
+        System.out.println(heapSize + " " + heapMaxSize + " " + heapFreeSize);
+    }
+
+    ////////////////////////////////////////////////////////////////
+
+    public static void main(String[] args) {
+        // basic queue operations
+        //basicQueueOperations();
+
+
+        // linear impact of increase number of threads for generation of integers
+        //increaseThreadsForIntGenerationImpact();
+
+
+        // impact of increase number of threads for filling thread-local queues
+        //increaseThreadsForFillingThreadlocalQueuesImpact();
+
+
+        // impact of increase number of threads for filling thread-local queues
+        //increaseThreadsForFillingThreadlocalQueuesImpact2();
+
+
+        // using of builtin ConcurrentQueue
+        //usingOfBuiltinConcurrentQueue();
+
+
+        // using of implemented ThreadSafeQueue
+        usingOfImplementedThreadSafeQueue();
     }
 }
